@@ -1,0 +1,54 @@
+import random
+
+def main():
+  again = "Y"
+
+  while again == "Y":
+    num = gen_number()
+    cap = guess_cap()
+    count = 0
+    while count in range(cap):
+      guess = get_number()
+      try:
+        if num == guess:
+          print("That's it")
+          break
+        elif num > guess:
+          print("Too Low!")
+        elif num < guess:
+          print("Too High!")
+          
+        count = count + 1
+      except ValueError:
+        print("Try again")
+        
+    print("\nOut of Guesses!")
+    again = try_again()
+
+
+def try_again():
+  while True:
+    again = input("\nDo you want to try again Y/N: ")
+    print()
+    again = again.upper()
+    if again != "Y" and again != "N":
+      print("Invalid option, try again.")
+    elif again == "N":
+      print("Bye!")
+      break
+    elif again == "Y":
+      return again 
+
+def get_number():
+  guess = int(input("Guess a number between 1 and 10: "))
+  return guess
+
+def gen_number():
+  num = random.randint(1,10)
+  return num
+
+def guess_cap():
+  cap = 5
+  return cap
+
+main()
